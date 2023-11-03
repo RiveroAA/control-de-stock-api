@@ -1,46 +1,67 @@
+<div class="page-header">
+    <h1>Ingresa tu Movimiento</h1>
+</div>
 <div>
-    <form (ngSubmit)="onSubmitForm(form.value)" #form="ngForm">
-        <label for="cantidad">Cantidad:</label>
-            <input type="number" name="cantidad" id="" [(ngModel)]="formularioData.cantidad"><br>
+    <form (ngSubmit)="onSubmitForm(form.value)" #form="ngForm" class="form">
+        <label for="cantidad" class="form-label">Cantidad:</label>
+            <input type="number" name="cantidad" id="" [(ngModel)]="formularioData.cantidad" class="form-control custom-input">
         <label for="producto">Producto:</label>
-            <select name="producto" id="" (change)="getSelectedProduct($event)" [(ngModel)]="formularioData.producto"> 
+            <select name="producto" id="" (change)="getSelectedProduct($event)" [(ngModel)]="formularioData.producto" class="form-select custom-select"> 
                 <option value="{{ producto.id }}" *ngFor="let producto of productos"> {{ producto.nombre }} </option>
-            </select><br>
+            </select>
+            <div *ngIf="productoEspecifico">
+                <p class="form-message">Cantidad total del producto: {{ productoEspecifico.cantidad }}</p>
+            </div>
         <label for="deposito">Deposito:</label>
-            <select name="deposito" id="" [(ngModel)]="formularioData.deposito">
+            <select name="deposito" id="" [(ngModel)]="formularioData.deposito" class="form-select custom-select">
                 <option value="{{ deposito.id }}" *ngFor="let deposito of depositos"> {{ deposito.nombre }} </option>
-            </select><br>
+            </select>
         <label for="tipo_movimiento">Tipo de movimiento:</label>
-            <select name="tipo_movimiento" id="" [(ngModel)]="formularioData.movimientoTipo">
+            <select name="tipo_movimiento" id="" [(ngModel)]="formularioData.movimientoTipo" class="form-select custom-select">
                 <option value="{{ tipo_movimiento.id }}" *ngFor="let tipo_movimiento of tipos_movimientos"> {{ tipo_movimiento.nombre }} </option>
-            </select><br>
-        <input type="submit" value="Enviar">
+            </select>
+        <input type="submit" value="Enviar" class="btn btn-primary form-button">
     </form>
 
-    <div *ngIf="productoEspecifico">
-        <p>Cantidad: {{ productoEspecifico.cantidad }}</p>
-    </div>
-</div>
-
-<div>
-    <table border="1">
-        <tr>
-            <td>Id</td>
-            <td>Cantidad</td>
-            <td>Nombre Producto</td>
-            <td>Tipo de movimiento</td>
-            <td>Descripción del movimiento</td>
-            <td>Deposito</td>
-            <td>Fecha</td>
-        </tr>
-        <tr *ngFor="let movimiento of movimientos">
-            <td> {{ movimiento.id }} </td>
-            <td>{{ movimiento.cantidad }}</td>
-            <td> {{ movimiento.producto.nombre }} </td>
-            <td> {{ movimiento.movimientoTipo.nombre}} </td>
-            <td> {{ movimiento.movimientoTipo.descripcion }} </td>
-            <td> {{ movimiento.deposito.nombre }} </td>
-            <td> {{ movimiento.fecha }} </td>
-        </tr>
+    <table class="table table-bordered my-table">
+        <thead>
+            <tr>
+                <td>Deposito:</td>
+                <td>Cantidad del producto:</td>
+            </tr>
+        </thead>
+        <thead>
+            <tr *ngFor="let i of depositoProductoEspecifico">
+                <td> {{ i.deposito.nombre }} </td>
+                <td> {{ i.cantidad }} </td>
+            </tr>
+        </thead>
     </table>
 </div>
+
+<!-- <div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <td>Id</td>
+                <td>Cantidad</td>
+                <td>Nombre Producto</td>
+                <td>Tipo de movimiento</td>
+                <td>Descripción del movimiento</td>
+                <td>Deposito</td>
+                <td>Fecha</td>
+            </tr>
+        </thead>
+        <thead>
+            <tr *ngFor="let movimiento of movimientos">
+                <td> {{ movimiento.id }} </td>
+                <td>{{ movimiento.cantidad }}</td>
+                <td> {{ movimiento.producto.nombre }} </td>
+                <td> {{ movimiento.movimientoTipo.nombre}} </td>
+                <td> {{ movimiento.movimientoTipo.descripcion }} </td>
+                <td> {{ movimiento.deposito.nombre }} </td>
+                <td> {{ movimiento.fecha }} </td>
+            </tr>
+        </thead>
+    </table>
+</div> -->

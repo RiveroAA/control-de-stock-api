@@ -68,7 +68,12 @@ export class FormComponent {
       });
       this.formService.pedirCantidadProductoEspecifico(selectedProducto).subscribe((data) => {
         this.depositoProductoEspecifico = data;
-        console.log(this.depositoProductoEspecifico);
+        if (Array.isArray(this.depositoProductoEspecifico)) {
+          this.depositoProductoEspecifico.forEach((item) => {
+            console.log('Cantidad de Producto Específico:', item.cantidad);
+            console.log('Cantidad de Producto Específico:', item.deposito.nombre);
+          });
+        }
       });
     }
   }
@@ -83,5 +88,8 @@ export class FormComponent {
 
     this.formService.crearMovimiento(nuevoMovimiento).subscribe(data => {
     });
+
+    window.alert('Movimiento registrado');
+    window.location.reload();
   }
 }
