@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { MovimientosComponent } from './components/movimientos/movimientos.component';
+import { FormComponent } from './components/form/form.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', component: MovimientosComponent}
+  { path: 'home', component: FormComponent}
 ];
 
 @NgModule({

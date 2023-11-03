@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/stock")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ProductoDepositoController {
 
   @Autowired
@@ -28,6 +29,11 @@ public class ProductoDepositoController {
             throws ResourceNotFoundException {
         ProductoDeposito productoDeposito = productoDepositoService.getProductoDepositoById(productoDepositoId);
         return ResponseEntity.ok().body(productoDeposito);
+    }
+
+    @GetMapping("/productos_depositos/producto/{id_producto}")
+    public List<ProductoDeposito> getProductosDepositosByProductoId(@PathVariable(value = "id_producto") Long productoId) {
+    return productoDepositoService.getProductosDepositosByProductoId(productoId);
     }
 
     @PostMapping("/productos_depositos")

@@ -1,0 +1,46 @@
+<div>
+    <form (ngSubmit)="onSubmitForm(form.value)" #form="ngForm">
+        <label for="cantidad">Cantidad:</label>
+            <input type="number" name="cantidad" id="" [(ngModel)]="formularioData.cantidad"><br>
+        <label for="producto">Producto:</label>
+            <select name="producto" id="" (change)="getSelectedProduct($event)" [(ngModel)]="formularioData.producto"> 
+                <option value="{{ producto.id }}" *ngFor="let producto of productos"> {{ producto.nombre }} </option>
+            </select><br>
+        <label for="deposito">Deposito:</label>
+            <select name="deposito" id="" [(ngModel)]="formularioData.deposito">
+                <option value="{{ deposito.id }}" *ngFor="let deposito of depositos"> {{ deposito.nombre }} </option>
+            </select><br>
+        <label for="tipo_movimiento">Tipo de movimiento:</label>
+            <select name="tipo_movimiento" id="" [(ngModel)]="formularioData.movimientoTipo">
+                <option value="{{ tipo_movimiento.id }}" *ngFor="let tipo_movimiento of tipos_movimientos"> {{ tipo_movimiento.nombre }} </option>
+            </select><br>
+        <input type="submit" value="Enviar">
+    </form>
+
+    <div *ngIf="productoEspecifico">
+        <p>Cantidad: {{ productoEspecifico.cantidad }}</p>
+    </div>
+</div>
+
+<div>
+    <table border="1">
+        <tr>
+            <td>Id</td>
+            <td>Cantidad</td>
+            <td>Nombre Producto</td>
+            <td>Tipo de movimiento</td>
+            <td>Descripción del movimiento</td>
+            <td>Deposito</td>
+            <td>Fecha</td>
+        </tr>
+        <tr *ngFor="let movimiento of movimientos">
+            <td> {{ movimiento.id }} </td>
+            <td>{{ movimiento.cantidad }}</td>
+            <td> {{ movimiento.producto.nombre }} </td>
+            <td> {{ movimiento.movimientoTipo.nombre}} </td>
+            <td> {{ movimiento.movimientoTipo.descripcion }} </td>
+            <td> {{ movimiento.deposito.nombre }} </td>
+            <td> {{ movimiento.fecha }} </td>
+        </tr>
+    </table>
+</div>
